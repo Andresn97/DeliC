@@ -1,5 +1,7 @@
 {
   "name": "DeliC",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
