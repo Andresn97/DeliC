@@ -12,9 +12,23 @@ export class LoginService {
 
   async Login(user) {
     try {
-      return await this.rutaFire.
+      return await this.rutaFire.signInWithEmailAndPassword(
+        user.email,
+        user.password
+      );
     } catch (err) {
       console.log("Error en el logueo: ", err);
+    }
+  }
+
+  async Registro(user) {
+    try {
+      return await this.rutaFire.createUserWithEmailAndPassword(
+        user.email,
+        user.password
+      );
+    } catch (error) {
+      console.log("Ocurrió un error en el registro del usuario", error);
     }
   }
 }
