@@ -16,6 +16,10 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { environment } from "./../environments/environment";
+
 library.add(fas, far, fab);
 
 @NgModule({
@@ -26,6 +30,8 @@ library.add(fas, far, fab);
     IonicModule.forRoot(),
     AppRoutingModule,
     FontAwesomeModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
   ],
   providers: [
     StatusBar,
