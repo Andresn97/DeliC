@@ -1,9 +1,45 @@
-<ion-header>
+<ion-header collapse="condense" traslucent="true">
   <ion-toolbar>
-    <ion-title>registro</ion-title>
+    <ion-img
+      src="/assets/icon/Logo.PNG"
+      style="width: 200px; height: 200px;"
+      id="logo"
+    ></ion-img>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <!-- <form > -->
 
+  <!-- </form> -->
+
+  <!-- <ion-slides mode="ios" pager="false" [options]="slideOpts">
+      <ion-slide id="form-1">
+        <h1>Awesome Slide Content</h1>
+      </ion-slide>
+      <ion-slide id="form-2">
+        <h1>Awesome Slide</h1>
+      </ion-slide>
+      <ion-slide>
+        <h1>Awesome</h1>
+      </ion-slide id="form-3">
+  </ion-slides> -->
+
+  <ion-slides mode="ios" pager="false" [options]="slideOpts" class="slide-full">
+    <ion-slide>
+      <form #formulario="ngForm" (ngSubmit)="registroUsuario()">
+        <h1>Awesome Slide Content</h1>
+      </form>
+    </ion-slide>
+    <ion-slide>
+      <form #formulario="ngForm" (ngSubmit)="registroUsuario()">
+        <h1>Awesome Slide Content</h1>
+      </form>
+    </ion-slide>
+    <ion-slide>
+      <form #formulario="ngForm" (ngSubmit)="registroUsuario()">
+        <h1>Awesome Slide Content</h1>
+      </form>
+    </ion-slide>
+  </ion-slides>
 </ion-content>

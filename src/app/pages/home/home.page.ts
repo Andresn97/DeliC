@@ -13,7 +13,7 @@ export class HomePage {
 
   // formulario.valid
 
-  registroUsuario() {
+  logeoUsuario() {
     console.log("Usuario:", this.user.correo);
     console.log("Contraseña:", this.user.contrasena);
   }
