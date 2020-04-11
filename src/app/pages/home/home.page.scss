@@ -8,24 +8,38 @@
   transform: translateY(-50%);
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.extras {
+  color: #68a64a;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
+// #container strong {
+//   font-size: 20px;
+//   line-height: 26px;
+// }
 
-  color: #8c8c8c;
+// #container p {
+//   font-size: 16px;
+//   line-height: 22px;
 
-  margin: 0;
+//   color: #8c8c8c;
+
+//   margin: 0;
+// }
+
+// #container a {
+//   text-decoration: none;
+// }
+
+// ion-content ion-toolbar {
+//   --background: translucent;
+// }
+
+.correo {
+  display: flex;
+  justify-content: center;
 }
 
-#container a {
-  text-decoration: none;
-}
-
-ion-content ion-toolbar {
-  --background: translucent;
+.pass {
+  display: flex;
+  justify-content: center;
 }

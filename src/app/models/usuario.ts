@@ -1,5 +1,6 @@
 export class Usuario {
-  nombre: string;
+  correo: string;
+  nombre?: string;
   contrasena: string;
   perfilFacebook: boolean;
   estado: string;

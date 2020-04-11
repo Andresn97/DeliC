@@ -13,7 +13,6 @@ export class Persona {
   edad?: number;
   fechaNacimiento?: Date;
   usuario: Usuario;
-  correo?: string;
   celular?: string;
   fechaRegistro?: Date = new Date();
   activo?: boolean = true;

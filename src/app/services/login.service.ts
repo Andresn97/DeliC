@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
+import { Usuario } from "../models/usuario";
 
 @Injectable({
   providedIn: "root",
@@ -10,22 +11,22 @@ export class LoginService {
     rutaFire.authState.subscribe((user) => (this.logueado = user));
   }
 
-  async Login(user) {
+  async Login(user: Usuario) {
     try {
       return await this.rutaFire.signInWithEmailAndPassword(
-        user.email,
-        user.password
+        user.correo,
+        user.contrasena
       );
     } catch (err) {
       console.log("Error en el logueo: ", err);
     }
   }
 
-  async Registro(user) {
+  async Registro(user: Usuario) {
     try {
       return await this.rutaFire.createUserWithEmailAndPassword(
-        user.email,
-        user.password
+        user.correo,
+        user.contrasena
       );
     } catch (error) {
       console.log("Ocurrió un error en el registro del usuario", error);
