@@ -1,0 +1,38 @@
+<ion-header collapse="condense" traslucent="true">
+  <ion-toolbar>
+    <ion-img
+      src="/assets/icon/Logo.PNG"
+      style="width: 200px; height: 200px;"
+      id="logo"
+    ></ion-img>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="12">
+          <ion-button
+            routerLink="/registro"
+            expand="block"
+            shape="round"
+            (click)="guardarSeleccion('Vendedor')"
+          >
+            Vendedor
+          </ion-button>
+        </ion-col>
+        <ion-col size="12">
+          <ion-button
+            routerLink="/registro"
+            expand="block"
+            shape="round"
+            (click)="guardarSeleccion('Cliente')"
+          >
+            Cliente
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

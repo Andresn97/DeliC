@@ -1,5 +1,8 @@
 <ion-header collapse="condense" traslucent="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/seleccion"></ion-back-button>
+    </ion-buttons>
     <ion-img
       src="/assets/icon/Logo.PNG"
       style="width: 200px; height: 200px;"
@@ -9,36 +12,217 @@
 </ion-header>
 
 <ion-content>
-  <!-- <form > -->
-
-  <!-- </form> -->
-
-  <!-- <ion-slides mode="ios" pager="false" [options]="slideOpts">
-      <ion-slide id="form-1">
-        <h1>Awesome Slide Content</h1>
-      </ion-slide>
-      <ion-slide id="form-2">
-        <h1>Awesome Slide</h1>
-      </ion-slide>
-      <ion-slide>
-        <h1>Awesome</h1>
-      </ion-slide id="form-3">
-  </ion-slides> -->
-
   <ion-slides mode="ios" pager="false" [options]="slideOpts" class="slide-full">
-    <ion-slide>
+    <ion-slide class="form">
       <form #formulario="ngForm" (ngSubmit)="registroUsuario()">
-        <h1>Awesome Slide Content</h1>
+        <!-- <ion-list> -->
+        <ion-row>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating"
+                >Nombre <span style="color: red;">*</span></ion-label
+              >
+              <ion-input
+                type="text"
+                name="primerNombre"
+                [(ngModel)]="persona.nombres.primerNombre"
+                (onchange)="primerFormulario(formulario)"
+                required
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating"
+                >Apellido <span style="color: red;">*</span>
+              </ion-label>
+              <ion-input
+                type="text"
+                name="primerApellido"
+                [(ngModel)]="persona.apellidos.primerApellido"
+                (onchange)="primerFormulario(formulario)"
+                required
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <div *ngIf="seleccion === 'Vendedor'">
+          <ion-row>
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating"
+                  >Segundo Nombre
+                  <!-- <span style="color: red;">*</span> -->
+                </ion-label>
+                <ion-input
+                  type="text"
+                  name="segundoNombre"
+                  [(ngModel)]="persona.nombres.segundoNombre"
+                  (onchange)="primerFormulario(formulario)"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating"
+                  >Segundo Apellido
+                  <!-- <span style="color: red;">*</span> -->
+                </ion-label>
+                <ion-input
+                  type="text"
+                  name="segundoApellido"
+                  [(ngModel)]="persona.apellidos.segundoApellido"
+                  (onchange)="primerFormulario(formulario)"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </div>
+        <!-- </ion-list> -->
       </form>
     </ion-slide>
-    <ion-slide>
+
+    <ion-slide class="form">
       <form #formulario="ngForm" (ngSubmit)="registroUsuario()">
-        <h1>Awesome Slide Content</h1>
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating"
+                  >Correo <span style="color: red;">*</span></ion-label
+                >
+                <ion-input
+                  type="text"
+                  name="correo"
+                  pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
+                  [(ngModel)]="persona.usuario.correo"
+                  (onchange)="segundoFormulario(formulario)"
+                  required
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating">Nombre de Usuario </ion-label>
+                <ion-input
+                  type="text"
+                  name="nombreUsuario"
+                  [(ngModel)]="persona.usuario.nombre"
+                  (onchange)="segundoFormulario(formulario)"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating"
+                  >Contraseña <span style="color: red;">*</span></ion-label
+                >
+                <ion-input
+                  type="password"
+                  name="contrasena"
+                  [(ngModel)]="persona.usuario.contrasena"
+                  (onchange)="segundoFormulario(formulario)"
+                  required
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating">Repita Contraseña</ion-label>
+                <ion-input
+                  type="password"
+                  name="confirmarContrasena"
+                  [(ngModel)]="confirmar_contrasena"
+                  (onchange)="segundoFormulario(formulario)"
+                  required
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </form>
     </ion-slide>
-    <ion-slide>
+
+    <ion-slide class="form">
       <form #formulario="ngForm" (ngSubmit)="registroUsuario()">
-        <h1>Awesome Slide Content</h1>
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating"
+                  >Género <span style="color: red;">*</span></ion-label
+                ><br />
+                <ion-button
+                  (click)="mostrarGeneros()"
+                  expand="block"
+                  fill="clear"
+                  shape="round"
+                >
+                  Escoger Género
+                </ion-button>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating">Edad</ion-label>
+                <ion-input
+                  type="number"
+                  name="edad"
+                  [(ngModel)]="persona.edad"
+                  (onchange)="tercerFormulario(formulario)"
+                  required
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating"
+                  >Fecha de Nacimiento<span style="color: red;"
+                    >*</span
+                  ></ion-label
+                >
+                <ion-datetime
+                  displayFormat="MM/DD/YYYY"
+                  min="1925-01-01"
+                  max="2002-30-12"
+                  (value)="persona.fechaNacimiento"
+                  (onchange)="tercerFormulario(formulario)"
+                  required
+                ></ion-datetime>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating">Celular</ion-label>
+                <ion-input
+                  type="text"
+                  name="celular"
+                  [(ngModel)]="persona.celular"
+                  (onchange)="tercerFormulario(formulario)"
+                  required
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="12">
+              <ion-button
+                (click)="registroUsuario()"
+                expand="block"
+                shape="round"
+              >
+                Quiero registrarme!!
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </form>
     </ion-slide>
   </ion-slides>

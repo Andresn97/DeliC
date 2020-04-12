@@ -17,6 +17,10 @@ const routes: Routes = [
     path: 'recuperarpass',
     loadChildren: () => import('./pages/recuperarpass/recuperarpass.module').then( m => m.RecuperarpassPageModule)
   },
+  {
+    path: 'seleccion',
+    loadChildren: () => import('./pages/seleccion/seleccion.module').then( m => m.SeleccionPageModule)
+  },
 ];
 
 @NgModule({

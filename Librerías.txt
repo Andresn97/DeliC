@@ -8,3 +8,7 @@ npm i firebase @angular/fire
 
 ionic cordova plugin add cordova-plugin-qrscanner
 npm install @ionic-native/qr-scanner
+
+
+ionic cordova plugin add cordova-sqlite-storage
+npm install --save @ionic/storage
