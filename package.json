@@ -35,7 +35,7 @@
     "cordova-base64-to-gallery": "^4.1.3",
     "cordova-sqlite-storage": "^5.0.0",
     "core-js": "^2.5.4",
-    "firebase": "^7.13.2",
+    "firebase": "^7.14.0",
     "ngx-qrcode2": "0.0.9",
     "phonegap-plugin-barcodescanner": "^8.1.0",
     "rxjs": "~6.5.1",

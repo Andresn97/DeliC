@@ -4,6 +4,9 @@ import { SeleccionService } from "src/app/services/seleccion.service";
 import { Usuario } from "src/app/models/usuario";
 import { PickerController } from "@ionic/angular";
 import { PickerOptions } from "@ionic/core";
+import { LoginService } from "src/app/services/login.service";
+import { Router } from "@angular/router";
+import { PersonaService } from "src/app/services/persona.service";
 
 @Component({
   selector: "app-registro",
@@ -12,7 +15,7 @@ import { PickerOptions } from "@ionic/core";
 })
 export class RegistroPage implements OnInit {
   slideOpts = {
-    initialSlide: 1,
+    initialSlide: 0,
     speed: 400,
   };
 
@@ -23,10 +26,14 @@ export class RegistroPage implements OnInit {
   form1: boolean;
   form2: boolean;
   form3: boolean;
+  pass: string;
 
   constructor(
     private sltc: SeleccionService,
-    private pickerCtrll: PickerController
+    private pickerCtrll: PickerController,
+    private lgn: LoginService,
+    private prsSvc: PersonaService,
+    private router: Router
   ) {
     this.usuario = {
       correo: null,
@@ -45,11 +52,10 @@ export class RegistroPage implements OnInit {
         segundoApellido: null,
       },
       genero: null,
-      edad: 0,
+      edad: null,
       fechaNacimiento: null,
       usuario: this.usuario,
       celular: null,
-      fechaRegistro: new Date(),
     };
   }
 
@@ -73,9 +79,21 @@ export class RegistroPage implements OnInit {
     this.form3 = resp.invalid;
   }
 
-  registroUsuario() {
+  async registroUsuario() {
     if (!this.form1 && !this.form2 && !this.form3 && this.persona.genero) {
-      console.log("Estos son los datos de la persona:", this.persona);
+      this.persona.usuario.contrasena = this.pass;
+      const user = await this.lgn.Registro(this.persona.usuario);
+      this.persona.usuario.perfilFacebook = false;
+      this.persona.usuario.activo = true;
+      this.persona.usuario.estado = "Activo";
+      if (user) {
+        // this.persona.fechaRegistro = new Date();
+        this.persona.activo = true;
+        console.log("El usuario se registró correctamente", user);
+        this.prsSvc.crearPersona(this.persona);
+        console.log("Estos son los datos de la persona:", this.persona);
+        this.router.navigateByUrl("/inicio");
+      }
     } else {
       console.log("Revise los campos");
     }

@@ -11,9 +11,9 @@ export class Persona {
   };
   genero?: string;
   edad?: number;
-  fechaNacimiento?: Date;
+  fechaNacimiento?: any;
   usuario: Usuario;
   celular?: string;
-  fechaRegistro?: Date = new Date();
-  activo?: boolean = true;
+  fechaRegistro?: any;
+  activo?: boolean;
 }

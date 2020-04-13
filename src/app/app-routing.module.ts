@@ -21,6 +21,10 @@ const routes: Routes = [
     path: 'seleccion',
     loadChildren: () => import('./pages/seleccion/seleccion.module').then( m => m.SeleccionPageModule)
   },
+  {
+    path: 'inicio',
+    loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule)
+  },
 ];
 
 @NgModule({

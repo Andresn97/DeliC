@@ -5,6 +5,7 @@ npm i --save @fortawesome/free-regular-svg-icons
 npm i --save @fortawesome/free-brands-svg-icons
 
 npm i firebase @angular/fire
+npm install firebase @angular/fire@5.2.3 --save
 
 ionic cordova plugin add cordova-plugin-qrscanner
 npm install @ionic-native/qr-scanner

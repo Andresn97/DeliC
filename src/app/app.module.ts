@@ -18,12 +18,15 @@ import { far } from "@fortawesome/free-regular-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 
 import { AngularFireModule } from "@angular/fire";
+// import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
-import { AngularFireStorageModule } from "@angular/fire/storage";
+// import { AngularFireStorageModule } from "@angular/fire/storage";
 import { environment } from "./../environments/environment";
 
 import { IonicStorageModule } from "@ionic/storage";
+import { HttpClientModule } from "@angular/common/http";
+import { FormsModule } from "@angular/forms";
 
 library.add(fas, far, fab);
 
@@ -38,8 +41,10 @@ library.add(fas, far, fab);
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    AngularFireStorageModule,
+    // AngularFireStorageModule,
     IonicStorageModule.forRoot(),
+    HttpClientModule,
+    FormsModule,
   ],
   providers: [
     StatusBar,
