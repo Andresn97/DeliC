@@ -25,20 +25,6 @@ export class PersonaService {
   private personaList: AngularFireList<Persona> = null;
 
   constructor(private db: AngularFireDatabase) {
-    //Definiendo la colección
-    // this.personaCollection = this.db.collection<Persona>("personas");
-
-    //Se regresa la colección localmente al servicio
-    // this.personas = this.personaCollection.snapshotChanges().pipe(
-    //   map((actions) => {
-    //     return actions.map((a) => {
-    //       const data = a.payload.doc.data();
-    //       const id = a.payload.doc.id;
-    //       return { id, ...data };
-    //     });
-    //   })
-    // );
-
     this.personaList = this.db.list(this.dbPath);
   }
 

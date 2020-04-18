@@ -32,4 +32,12 @@ export class LoginService {
       console.log("Ocurrió un error en el registro del usuario", error);
     }
   }
+
+  // async estaRegistrado(user: Usuario) {
+  //   try {
+  //     return await this.rutaFire.
+  //   } catch (error) {
+
+  //   }
+  // }
 }
