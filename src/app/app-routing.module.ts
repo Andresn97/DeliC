@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
+import { AccesoGuard } from "./guards/acceso.guard";
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -10,20 +11,30 @@ const routes: Routes = [
   // },
   { path: "home", loadChildren: "./pages/home/home.module#HomePageModule" },
   {
-    path: 'registro',
-    loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
+    path: "registro",
+    loadChildren: () =>
+      import("./pages/registro/registro.module").then(
+        (m) => m.RegistroPageModule
+      ),
   },
   {
-    path: 'recuperarpass',
-    loadChildren: () => import('./pages/recuperarpass/recuperarpass.module').then( m => m.RecuperarpassPageModule)
+    path: "recuperarpass",
+    loadChildren: () =>
+      import("./pages/recuperarpass/recuperarpass.module").then(
+        (m) => m.RecuperarpassPageModule
+      ),
   },
   {
-    path: 'seleccion',
-    loadChildren: () => import('./pages/seleccion/seleccion.module').then( m => m.SeleccionPageModule)
+    path: "seleccion",
+    loadChildren: () =>
+      import("./pages/seleccion/seleccion.module").then(
+        (m) => m.SeleccionPageModule
+      ),
   },
   {
-    path: 'inicio',
-    loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule)
+    path: "inicio",
+    loadChildren: "./pages/inicio/inicio.module#InicioPageModule",
+    canActivate: [AccesoGuard],
   },
 ];
 

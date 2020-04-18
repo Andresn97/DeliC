@@ -23,8 +23,13 @@ export class AccesoGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.lgn) {
+    if (this.lgn.estaRegistrado) {
+      console.log("Logeado desde Guard");
+
       return true;
     }
+    console.log("Acceso Denegado");
+    this.router.navigateByUrl("/");
+    return false;
   }
 }

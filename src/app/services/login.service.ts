@@ -33,11 +33,19 @@ export class LoginService {
     }
   }
 
-  // async estaRegistrado(user: Usuario) {
-  //   try {
-  //     return await this.rutaFire.
-  //   } catch (error) {
+  async estaRegistrado(user: Usuario) {
+    try {
+      return await this.rutaFire.isSignInWithEmailLink(user.correo);
+    } catch (error) {
+      console.log("Ocurrió un error en la confirmación del corrreo: ", error);
+    }
+  }
 
-  //   }
-  // }
+  async logOut() {
+    try {
+      return await this.rutaFire.signOut();
+    } catch (error) {
+      console.log("Ocurrió un error en cerrar la sesión actual", error);
+    }
+  }
 }
