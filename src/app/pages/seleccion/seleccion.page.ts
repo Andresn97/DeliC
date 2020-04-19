@@ -14,5 +14,8 @@ export class SeleccionPage implements OnInit {
   guardarSeleccion(seleccion: string) {
     // console.log(seleccion);
     this.slct.setSeleccion(seleccion);
+    this.slct.getSeleccion().then((val) => {
+      console.log("Tipo:", val);
+    });
   }
 }

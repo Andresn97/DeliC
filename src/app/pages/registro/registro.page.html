@@ -61,42 +61,42 @@
                         ></ion-input>
                       </ion-item>
 
-                      <div *ngIf="seleccion === 'Vendedor'">
-                        <ion-item class="items">
-                          <span
-                            *ngIf="formulario.submitted && formulario.controls['segundoNombre'].errors"
-                            >El Segundo Nombre es obligatorio</span
-                          >
-                          <ion-label position="floating"
-                            >Segundo Nombre
-                            <!-- <span style="color: red;">*</span> -->
-                          </ion-label>
-                          <ion-input
-                            type="text"
-                            name="segundoNombre"
-                            [(ngModel)]="persona.nombres.segundoNombre"
-                            minleght="3"
-                            (onchange)="primerFormulario(formulario)"
-                          ></ion-input>
-                        </ion-item>
+                      <!-- <div *ngIf="seleccion === 'Vendedor'"> -->
+                      <ion-item class="items">
+                        <span
+                          *ngIf="formulario.submitted && formulario.controls['segundoNombre'].errors"
+                          >El Segundo Nombre es obligatorio</span
+                        >
+                        <ion-label position="floating"
+                          >Segundo Nombre
+                          <!-- <span style="color: red;">*</span> -->
+                        </ion-label>
+                        <ion-input
+                          type="text"
+                          name="segundoNombre"
+                          [(ngModel)]="persona.nombres.segundoNombre"
+                          minleght="3"
+                          (onchange)="primerFormulario(formulario)"
+                        ></ion-input>
+                      </ion-item>
 
-                        <ion-item class="items">
-                          <span
-                            *ngIf="formulario.submitted && formulario.controls['segundoApellido'].errors"
-                            >El Segundo Apellido es obligatorio</span
-                          >
-                          <ion-label position="floating"
-                            >Segundo Apellido
-                            <!-- <span style="color: red;">*</span> -->
-                          </ion-label>
-                          <ion-input
-                            type="text"
-                            name="segundoApellido"
-                            [(ngModel)]="persona.apellidos.segundoApellido"
-                            (onchange)="primerFormulario(formulario)"
-                          ></ion-input>
-                        </ion-item>
-                      </div>
+                      <ion-item class="items">
+                        <span
+                          *ngIf="formulario.submitted && formulario.controls['segundoApellido'].errors"
+                          >El Segundo Apellido es obligatorio</span
+                        >
+                        <ion-label position="floating"
+                          >Segundo Apellido
+                          <!-- <span style="color: red;">*</span> -->
+                        </ion-label>
+                        <ion-input
+                          type="text"
+                          name="segundoApellido"
+                          [(ngModel)]="persona.apellidos.segundoApellido"
+                          (onchange)="primerFormulario(formulario)"
+                        ></ion-input>
+                      </ion-item>
+                      <!-- </div> -->
                       <br />
                     </ion-list>
                   </form>
@@ -168,6 +168,7 @@
                           name="contrasena"
                           [(ngModel)]="pass"
                           (onchange)="segundoFormulario(formulario)"
+                          minleght="6"
                           required
                         ></ion-input>
                       </ion-item>
@@ -272,6 +273,57 @@
                           (onchange)="tercerFormulario(formulario)"
                         ></ion-input>
                       </ion-item>
+                      <!-- <br />
+                      <ion-button
+                        (click)="registroUsuario()"
+                        expand="block"
+                        shape="round"
+                      >
+                        Quiero registrarme!!
+                      </ion-button> -->
+                    </ion-list>
+                  </form>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+
+    <ion-slide class="form">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <ion-card>
+              <ion-card-header>
+                <!-- <ion-card-title>Registro de Usuario</ion-card-title> -->
+              </ion-card-header>
+              <ion-card-content center>
+                <div class="container">
+                  <form #formulario="ngForm" (ngSubmit)="registroUsuario()">
+                    <ion-list>
+                      <ion-item class="items">
+                        <ion-label position="floating"
+                          >Tipo de Usuario<span style="color: red;"
+                            >*</span
+                          ></ion-label
+                        >
+                        <ion-select
+                          [(value)]="persona.tipo"
+                          multiple="false"
+                          placeholder="Seleccione el Tipo"
+                          required
+                        >
+                          <ion-select-option value="Vendedor"
+                            >Vendedor</ion-select-option
+                          >
+                          <ion-select-option value="Consumidor"
+                            >Consumidor</ion-select-option
+                          >
+                        </ion-select>
+                      </ion-item>
+
                       <br />
                       <ion-button
                         (click)="registroUsuario()"

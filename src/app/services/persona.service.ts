@@ -29,11 +29,10 @@ export class PersonaService {
   }
 
   crearPersona(persona: Persona): void {
-    // return this.personaCollection.add(persona);
     persona.fechaRegistro = firebase.firestore.Timestamp.fromDate(new Date());
-    persona.fechaNacimiento = firebase.firestore.Timestamp.fromDate(
-      persona.fechaNacimiento
-    );
+    // persona.fechaNacimiento = firebase.firestore.Timestamp.fromDate(
+    //   persona.fechaNacimiento
+    // );
     this.personaList.push(persona);
   }
 
@@ -46,6 +45,12 @@ export class PersonaService {
   getPersonaList(): AngularFireList<Persona> {
     // return this.db.collection("persona").snapshotChanges();
     return this.personaList;
+  }
+
+  getPersona(correo: string): AngularFireList<Persona> {
+    return (this.personaList = this.db.list(this.dbPath, (ref) =>
+      ref.orderByChild("usuario.correo").equalTo(correo)
+    ));
   }
 
   editarPersona(id: string, persona: Persona): Promise<void> {

@@ -36,6 +36,22 @@ const routes: Routes = [
     loadChildren: "./pages/inicio/inicio.module#InicioPageModule",
     canActivate: [AccesoGuard],
   },
+  {
+    path: "local",
+    loadChildren: () =>
+      import("./pages/local/local.module").then((m) => m.LocalPageModule),
+  },
+  {
+    path: "perfil-vendedor",
+    loadChildren: () =>
+      import("./pages/perfil-vendedor/perfil-vendedor.module").then(
+        (m) => m.PerfilVendedorPageModule
+      ),
+  },
+  {
+    path: 'registro-local',
+    loadChildren: () => import('./pages/registro-local/registro-local.module').then( m => m.RegistroLocalPageModule)
+  },
 ];
 
 @NgModule({

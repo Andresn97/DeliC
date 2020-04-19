@@ -5,18 +5,19 @@ import { Storage } from "@ionic/storage";
   providedIn: "root",
 })
 export class SeleccionService {
+  private Tipos: [] = [];
   constructor(private strg: Storage) {}
 
-  setSeleccion(seleccion: string) {
-    this.strg.get("seleccion").then((val: string) => {
-      if (!val) {
-        this.strg.set("seleccion", seleccion);
+  setSeleccion(tipo: string) {
+    return this.strg.get("seleccion").then((val: string[]) => {
+      if (val) {
+        // console.log("Se remueve:", val);
+        // this.strg.remove("seleccion");
+        val.push(tipo);
+        this.strg.set("seleccion", val);
+        // console.log("Nuevo tipo agregado: ", val);
       } else {
-        console.log("Se remueve:", val);
-        this.strg.remove("seleccion");
-        this.strg.set("seleccion", seleccion).then((val: string) => {
-          console.log("Selección: ", val);
-        });
+        this.strg.set("seleccion", [tipo]);
       }
     });
     // this.strg.set("seleccion", seleccion).then((val:string) =>{
@@ -26,11 +27,14 @@ export class SeleccionService {
     // });
   }
 
-  getSeleccion() {
-    return this.strg.get("seleccion").then((val) => {
-      console.log("La selección realizada fue: ", val);
-
-      return val;
+  getSeleccion(num?: number | null) {
+    return this.strg.get("seleccion").then((val: string[]) => {
+      if (num) {
+        let valor = val.lastIndexOf;
+        return valor;
+      } else {
+        return val;
+      }
     });
   }
 
