@@ -1,8 +1,6 @@
 import { Injectable } from "@angular/core";
-import {
-  AngularFireDatabase,
-  AngularFireList,
-} from "@angular/fire/database/database";
+import { AngularFireDatabase, AngularFireList } from "@angular/fire/database";
+
 import { Local } from "../models/local";
 import * as firebase from "firebase";
 

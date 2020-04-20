@@ -42,6 +42,11 @@ const routes: Routes = [
       import("./pages/local/local.module").then((m) => m.LocalPageModule),
   },
   {
+    path: "local/:nombreLocal",
+    loadChildren: () =>
+      import("./pages/local/local.module").then((m) => m.LocalPageModule),
+  },
+  {
     path: "perfil-vendedor",
     loadChildren: () =>
       import("./pages/perfil-vendedor/perfil-vendedor.module").then(
@@ -49,8 +54,11 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'registro-local',
-    loadChildren: () => import('./pages/registro-local/registro-local.module').then( m => m.RegistroLocalPageModule)
+    path: "registro-local",
+    loadChildren: () =>
+      import("./pages/registro-local/registro-local.module").then(
+        (m) => m.RegistroLocalPageModule
+      ),
   },
 ];
 
