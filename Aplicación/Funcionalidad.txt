@@ -4,3 +4,4 @@
 - Mostrar los mensajes de error del formulario de registro
 - Extraer la fecha de nacimiento correctamente del componente y guardarla
 - Encriptar las contraseñas
+- Asociar el tipo con variable de persona.tipo

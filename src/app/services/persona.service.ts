@@ -1,10 +1,5 @@
 import { Injectable } from "@angular/core";
-import {
-  AngularFireDatabase,
-  AngularFireList,
-  // AngularFireList,
-  // AngularFireObject,
-} from "@angular/fire/database";
+import { AngularFireDatabase, AngularFireList } from "@angular/fire/database";
 // import {
 //   AngularFirestore,
 //   AngularFirestoreCollection,
@@ -12,6 +7,8 @@ import {
 // } from "@angular/fire/firestore";
 import { Persona } from "../models/persona";
 import * as firebase from "firebase";
+import { Usuario } from "../models/usuario";
+import { Observable } from "rxjs";
 // import { Observable } from "rxjs";
 // import { map } from "rxjs/operators";
 
@@ -25,29 +22,14 @@ export class PersonaService {
   private personaList: AngularFireList<Persona> = null;
 
   constructor(private db: AngularFireDatabase) {
-    //Definiendo la colección
-    // this.personaCollection = this.db.collection<Persona>("personas");
-
-    //Se regresa la colección localmente al servicio
-    // this.personas = this.personaCollection.snapshotChanges().pipe(
-    //   map((actions) => {
-    //     return actions.map((a) => {
-    //       const data = a.payload.doc.data();
-    //       const id = a.payload.doc.id;
-    //       return { id, ...data };
-    //     });
-    //   })
-    // );
-
     this.personaList = this.db.list(this.dbPath);
   }
 
   crearPersona(persona: Persona): void {
-    // return this.personaCollection.add(persona);
     persona.fechaRegistro = firebase.firestore.Timestamp.fromDate(new Date());
-    persona.fechaNacimiento = firebase.firestore.Timestamp.fromDate(
-      persona.fechaNacimiento
-    );
+    // persona.fechaNacimiento = firebase.firestore.Timestamp.fromDate(
+    //   persona.fechaNacimiento
+    // );
     this.personaList.push(persona);
   }
 
@@ -57,9 +39,43 @@ export class PersonaService {
   // return;
   // }
 
-  getPersonaList(): AngularFireList<Persona> {
+  getPersonaList(): Observable<Persona[]> {
     // return this.db.collection("persona").snapshotChanges();
-    return this.personaList;
+    let person: Observable<Persona[]>;
+
+    return (person = (this.personaList = this.db.list(this.dbPath, (ref) =>
+      ref.orderByChild("usuario")
+    )).valueChanges());
+  }
+
+  //Método en mantenimiento
+  getPersona(correo: string): Observable<Persona[]> {
+    let person: Observable<Persona[]>;
+
+    return (person = (this.personaList = this.db.list(this.dbPath, (ref) =>
+      ref.orderByChild("usuario")
+    )).valueChanges());
+
+    // let registro: Persona;
+
+    // person.forEach((personas) => {
+    //   personas.forEach((persona) => {
+    //     if (persona.usuario.correo === correo) {
+    //       registro = persona;
+    //       console.log("Desde servicio", registro);
+    //     }
+    //   });
+    // });
+
+    // if (registro !== null) {
+    //   console.log("Existe registro");
+
+    //   return registro;
+    // } else {
+    //   console.log("No existe registro");
+
+    //   return null;
+    // }
   }
 
   editarPersona(id: string, persona: Persona): Promise<void> {

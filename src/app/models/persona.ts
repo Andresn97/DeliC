@@ -10,6 +10,7 @@ export class Persona {
     segundoApellido?: string;
   };
   genero?: string;
+  tipo?: string;
   edad?: number;
   fechaNacimiento?: any;
   usuario: Usuario;

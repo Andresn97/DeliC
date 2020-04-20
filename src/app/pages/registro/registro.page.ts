@@ -51,6 +51,7 @@ export class RegistroPage implements OnInit {
         primerApellido: null,
         segundoApellido: null,
       },
+      tipo: "Vendedor",
       genero: null,
       edad: null,
       fechaNacimiento: null,
@@ -60,10 +61,10 @@ export class RegistroPage implements OnInit {
   }
 
   ngOnInit() {
-    this.sltc.getSeleccion().then((val: string) => {
-      this.seleccion = val;
-      // console.log("Seleccion: ", this.seleccion);
-    });
+    // this.sltc.getSeleccion().then((val: string) => {
+    //   this.seleccion = val;
+    // console.log("Seleccion: ", this.seleccion);
+    // });
   }
 
   //Validar formularios
@@ -92,6 +93,8 @@ export class RegistroPage implements OnInit {
         console.log("El usuario se registró correctamente", user);
         this.prsSvc.crearPersona(this.persona);
         console.log("Estos son los datos de la persona:", this.persona);
+        console.log("Tipo", this.persona.tipo);
+
         this.router.navigateByUrl("/inicio");
       }
     } else {
