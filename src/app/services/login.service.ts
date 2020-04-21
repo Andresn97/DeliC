@@ -74,12 +74,12 @@ export class LoginService {
 
   cargarCorreo(correo: string) {
     this.usuario = new Usuario();
-    this.strg.setItem("correo", this.usuario.correo);
+    this.strg.set("correo", this.usuario.correo);
   }
 
   async retornarCorreo(): Promise<Usuario> {
     this.usuario = new Usuario();
-    this.usuario.correo = await this.strg.getItem("correo");
+    this.usuario.correo = await this.strg.get("correo");
     return this.usuario;
   }
 
