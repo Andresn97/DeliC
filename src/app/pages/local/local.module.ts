@@ -8,6 +8,7 @@ import { IonicModule } from "@ionic/angular";
 import { LocalPageRoutingModule } from "./local-routing.module";
 
 import { LocalPage } from "./local.page";
+import { ComponentsModule } from "src/app/components/components.module";
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { LocalPage } from "./local.page";
     IonicModule,
     LocalPageRoutingModule,
     NgxQRCodeModule,
+    ComponentsModule,
   ],
   declarations: [LocalPage],
 })

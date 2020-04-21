@@ -1,9 +1,17 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>local</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
+
+<app-header titulo="Local"></app-header>
 
 <ion-content>
+  <ion-card-title>{{local.nombre}}</ion-card-title>
+
+  <ion-card-content>
+    Awesome content
+  </ion-card-content>
+
   <ngx-qrcode [(qrc-value)]="url" [qrc-element-type]="tipo"> </ngx-qrcode>
 </ion-content>

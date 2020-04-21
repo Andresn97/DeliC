@@ -5,6 +5,7 @@ import { LoginService } from "src/app/services/login.service";
 import { PersonaService } from "src/app/services/persona.service";
 import { Persona } from "src/app/models/persona";
 import { Observable } from "rxjs";
+import { AlertController } from "@ionic/angular";
 
 @Component({
   selector: "app-home",
@@ -15,6 +16,8 @@ export class HomePage {
   public user: Usuario = new Usuario();
   private personas: Observable<Persona[]>;
   private valores: Persona[];
+  private usuario: Usuario;
+  per: any;
 
   constructor(
     private router: Router,
@@ -26,9 +29,9 @@ export class HomePage {
     this.personas = this.prsnSrv.getPersonaList();
   }
 
-  // ionViewWillLeave() {
-  //   userSubscription.unsubscribe();
-  // }
+  ionViewWillLeave() {
+    this.per.unsubscribe();
+  }
 
   // formulario.valid
 
@@ -39,21 +42,7 @@ export class HomePage {
       console.log("Usuario:", this.user.correo);
       console.log("Contraseña:", this.user.contrasena);
       //Validar el tipo de Persona
-      // this.persona = this.prsnSrv.getPersona(this.user.correo);
-      // this.persona.subscribe((data) => {
-      //   console.log(data);
-      // });
       this.recuperarTipo();
-      this.router.navigateByUrl("/inicio");
-      console.log(this.valores);
-
-      // this.valores.forEach((persona) => {
-      //   if (persona.tipo === "Vendedor") {
-      //     this.router.navigateByUrl("/local");
-      //   } else {
-      //     this.router.navigateByUrl("/inicio");
-      //   }
-      // });
     } else {
       console.log("El logeo no se pudo realizar");
     }
@@ -62,23 +51,39 @@ export class HomePage {
   }
 
   recuperarTipo() {
-    this.personas.subscribe((data) => {
-      this.valores = data;
+    this.lgnSrv.retornarUsuario().then((data: firebase.User) => {
+      this.usuario = new Usuario();
+      this.usuario.correo = data.email;
+      this.lgnSrv.cargarCorreo(this.usuario.correo);
+      //Extracción de datos de Persona
+      this.per = this.personas.subscribe(
+        (datos) => {
+          this.valores = datos;
 
-      // data.forEach((persona) => {
-      //   if (persona.usuario.correo === this.user.correo) {
-      //     console.log("entro");
+          this.valores.forEach((persona) => {
+            // console.log(this.user.correo);
+            // console.log(persona.usuario.correo);
+            // console.log(persona.tipo);
+            // console.log("---------------------");
 
-      //     // this.persona = persona;
-      //     console.log("Desde servicio", persona);
-      //     if (persona.tipo === "Vendedor") {
-      //       this.router.navigateByUrl("/local");
-      //       console.log("entro");
-      //     } else {
-      //       this.router.navigateByUrl("/inicio");
-      //     }
-      //   }
-      // });
+            if (persona.usuario.correo === this.usuario.correo) {
+              if (persona.tipo == "Vendedor") {
+                this.router.navigateByUrl("/local");
+              } else {
+                this.router.navigateByUrl("/inicio");
+              }
+
+              console.log("Usuario:", this.usuario);
+
+              console.log("Esta es la persona:", persona);
+            }
+          });
+        },
+        (error) => {
+          console.log("El usuario no se logeo correctamente");
+        }
+      );
     });
   }
+  S;
 }

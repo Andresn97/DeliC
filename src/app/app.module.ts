@@ -29,6 +29,7 @@ import { BarcodeScanner } from "@ionic-native/barcode-scanner/ngx";
 import { IonicStorageModule } from "@ionic/storage";
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
+import { ComponentsModule } from "./components/components.module";
 
 library.add(fas, far, fab);
 
@@ -47,6 +48,7 @@ library.add(fas, far, fab);
     IonicStorageModule.forRoot(),
     HttpClientModule,
     FormsModule,
+    ComponentsModule,
   ],
   providers: [
     StatusBar,

@@ -1,13 +1,23 @@
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Usuario } from "../models/usuario";
+import { Router } from "@angular/router";
+import { AlertController } from "@ionic/angular";
+import { Storage } from "@ionic/storage";
 
 @Injectable({
   providedIn: "root",
 })
 export class LoginService {
   public logueado: any;
-  constructor(private rutaFire: AngularFireAuth) {
+  private usuario: Usuario = null;
+
+  constructor(
+    private rutaFire: AngularFireAuth,
+    private route: Router,
+    private alertCtrl: AlertController,
+    private strg: Storage
+  ) {
     rutaFire.authState.subscribe((user) => (this.logueado = user));
   }
 
@@ -18,6 +28,7 @@ export class LoginService {
         user.contrasena
       );
     } catch (err) {
+      this.presentAlert();
       console.log("Error en el logueo: ", err);
     }
   }
@@ -42,10 +53,11 @@ export class LoginService {
   }
 
   retornarUsuario() {
-    let user;
-    user = this.rutaFire.currentUser;
+    let user = this.rutaFire.currentUser;
 
     if (user) {
+      console.log("Usuario sigue logueado");
+
       return user;
     } else {
       return null;
@@ -58,5 +70,44 @@ export class LoginService {
     } catch (error) {
       console.log("Ocurrió un error en cerrar la sesión actual", error);
     }
+  }
+
+  cargarCorreo(correo: string) {
+    this.usuario = new Usuario();
+    this.strg.setItem("correo", this.usuario.correo);
+  }
+
+  async retornarCorreo(): Promise<Usuario> {
+    this.usuario = new Usuario();
+    this.usuario.correo = await this.strg.getItem("correo");
+    return this.usuario;
+  }
+
+  eliminarCorreo(correo: string) {
+    this.strg.removeItem("correo");
+  }
+
+  async presentAlert() {
+    const alert = await this.alertCtrl.create({
+      header: "Aviso",
+      message: "No se pudo ingresar, revise los campos",
+      buttons: [
+        {
+          text: "OK",
+          handler: () => {
+            console.log("Se seleccionó OK");
+            this.route.navigate(["/"]);
+          },
+        },
+        // {
+        //   text: "No",
+        //   handler: () => {
+        //     console.log("Se seleccionó No");
+        //   },
+        // },
+      ],
+    });
+
+    await alert.present();
   }
 }

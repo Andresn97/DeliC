@@ -1,4 +1,3 @@
-- Obtener dato de selección en la página de registro
 - Funcionalidad de confirmación de contraseña
 - El botón Cancelar de ion-pick no funciona
 - Mostrar los mensajes de error del formulario de registro

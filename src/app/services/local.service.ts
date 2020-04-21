@@ -3,6 +3,7 @@ import { AngularFireDatabase, AngularFireList } from "@angular/fire/database";
 
 import { Local } from "../models/local";
 import * as firebase from "firebase";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -17,14 +18,15 @@ export class LocalService {
 
   guardarLocal(local: Local) {
     local.fechaRegistro = firebase.firestore.Timestamp.fromDate(new Date());
-    // persona.fechaNacimiento = firebase.firestore.Timestamp.fromDate(
-    //   persona.fechaNacimiento
-    // );
     this.localList.push(local);
   }
 
-  getLocalList(): AngularFireList<Local> {
-    return this.localList;
+  getLocalList(): Observable<Local[]> {
+    let datos: Observable<Local[]>;
+
+    return (datos = (this.localList = this.db.list(
+      this.dbPath
+    )).valueChanges());
   }
 
   editarLocal(id: string, local: Local): Promise<void> {

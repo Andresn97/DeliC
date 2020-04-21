@@ -1,15 +1,16 @@
 <ion-header no-border>
-  <ion-toolbar color="header">
+  <ion-toolbar color="light">
     <!-- <ion-buttons slot="start">
       <ion-back-button defaultHref="/" color="header"></ion-back-button>
     </ion-buttons> -->
 
-    <ion-menu-button menu="first" color="light" slot="start"></ion-menu-button>
-
-    <ion-button (click)="cerrarSesion()" slot="end">
-      <ion-label>Cerrar Sesión</ion-label>
-    </ion-button>
-
     <ion-title class="ion-text-left"> {{ titulo }} </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarSesion()">
+        <ion-icon name="log-out-outline"></ion-icon>
+        Cerrar Sesión
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
