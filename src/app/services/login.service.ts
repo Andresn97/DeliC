@@ -41,6 +41,17 @@ export class LoginService {
     }
   }
 
+  retornarUsuario() {
+    let user;
+    user = this.rutaFire.currentUser;
+
+    if (user) {
+      return user;
+    } else {
+      return null;
+    }
+  }
+
   async logOut() {
     try {
       return await this.rutaFire.signOut();

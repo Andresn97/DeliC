@@ -9,7 +9,7 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ["./local.page.scss"],
 })
 export class LocalPage implements OnInit {
-  url = "http://localhost:8100/local/coral";
+  url = "http://localhost:8100/local/";
   tipo: "ulr" | "canvas" | "img" = "canvas";
 
   constructor(
@@ -20,6 +20,6 @@ export class LocalPage implements OnInit {
 
   ngOnInit() {
     let param = this.route.snapshot.params.nombreLocal;
-    console.log(param);
+    this.url += param;
   }
 }

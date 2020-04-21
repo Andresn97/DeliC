@@ -14,7 +14,7 @@ import { Observable } from "rxjs";
 export class HomePage {
   public user: Usuario = new Usuario();
   private personas: Observable<Persona[]>;
-  private persona: Persona;
+  private valores: Persona[];
 
   constructor(
     private router: Router,
@@ -25,6 +25,10 @@ export class HomePage {
   ngOnInit(): void {
     this.personas = this.prsnSrv.getPersonaList();
   }
+
+  // ionViewWillLeave() {
+  //   userSubscription.unsubscribe();
+  // }
 
   // formulario.valid
 
@@ -40,7 +44,16 @@ export class HomePage {
       //   console.log(data);
       // });
       this.recuperarTipo();
-      // console.log(this.persona);
+      this.router.navigateByUrl("/inicio");
+      console.log(this.valores);
+
+      // this.valores.forEach((persona) => {
+      //   if (persona.tipo === "Vendedor") {
+      //     this.router.navigateByUrl("/local");
+      //   } else {
+      //     this.router.navigateByUrl("/inicio");
+      //   }
+      // });
     } else {
       console.log("El logeo no se pudo realizar");
     }
@@ -50,24 +63,22 @@ export class HomePage {
 
   recuperarTipo() {
     this.personas.subscribe((data) => {
-      data.forEach((persona) => {
-        if (persona.usuario.correo === this.user.correo) {
-          // this.persona = persona;
-          console.log("Desde servicio", persona);
-          if (persona.tipo === "Vendedor") {
-            this.router.navigateByUrl("/local");
-            console.log("entro");
-          } else {
-            this.router.navigateByUrl("/inicio");
-          }
-        }
-      });
+      this.valores = data;
+
+      // data.forEach((persona) => {
+      //   if (persona.usuario.correo === this.user.correo) {
+      //     console.log("entro");
+
+      //     // this.persona = persona;
+      //     console.log("Desde servicio", persona);
+      //     if (persona.tipo === "Vendedor") {
+      //       this.router.navigateByUrl("/local");
+      //       console.log("entro");
+      //     } else {
+      //       this.router.navigateByUrl("/inicio");
+      //     }
+      //   }
+      // });
     });
-
-    // this.personas.forEach((personas) => {
-    //   personas.forEach((persona) => {
-
-    //   });
-    // });
   }
 }
