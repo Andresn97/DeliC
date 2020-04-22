@@ -6,6 +6,7 @@ import { PersonaService } from "src/app/services/persona.service";
 import { Persona } from "src/app/models/persona";
 import { Observable } from "rxjs";
 import { AlertController } from "@ionic/angular";
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 
 @Component({
   selector: "app-home",
@@ -22,7 +23,8 @@ export class HomePage {
   constructor(
     private router: Router,
     private lgnSrv: LoginService,
-    private prsnSrv: PersonaService
+    private prsnSrv: PersonaService,
+    public fb : Facebook
   ) {}
 
   ngOnInit(): void {
@@ -86,4 +88,14 @@ export class HomePage {
     });
   }
   S;
+
+  login(){
+    this.fb.login(['public_profile', 'user_friends', 'email'])
+  .then((res: FacebookLoginResponse) => 
+  //console.log('Logged into Facebook!', res)
+  alert(JSON.stringify(res))
+  )
+  .catch(e => console.log('Error logging into Facebook', e));
+
+  }
 }

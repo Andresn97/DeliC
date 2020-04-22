@@ -18,6 +18,7 @@ import { Observable } from "rxjs";
 export class PersonaService {
   // bookingListRef: AngularFireList<any>;
   // private personas: Observable<Persona[]>;
+  
   private dbPath: string = "/personas";
   private personaList: AngularFireList<Persona> = null;
 
@@ -30,6 +31,8 @@ export class PersonaService {
     // persona.fechaNacimiento = firebase.firestore.Timestamp.fromDate(
     //   persona.fechaNacimiento
     // );
+    //persona.usuario.contrasena
+    //return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
     this.personaList.push(persona);
   }
 

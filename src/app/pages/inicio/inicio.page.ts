@@ -28,7 +28,7 @@ export class InicioPage implements OnInit {
       })
       .catch((err) => {
         console.log("Error", err);
-        this.hQR.guardarHistorialQR("QRCode", "https://google.com");
+       // this.hQR.guardarHistorialQR("QRCode", "https://google.com");
         console.log();
       });
   }

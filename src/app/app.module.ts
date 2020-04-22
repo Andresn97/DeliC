@@ -31,6 +31,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { ComponentsModule } from "./components/components.module";
 
+import { Facebook } from '@ionic-native/facebook/ngx';
+
 library.add(fas, far, fab);
 
 @NgModule({
@@ -55,6 +57,7 @@ library.add(fas, far, fab);
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     BarcodeScanner,
+    Facebook,
   ],
 
   bootstrap: [AppComponent],
