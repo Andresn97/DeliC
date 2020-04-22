@@ -4,6 +4,7 @@ import { Usuario } from "../models/usuario";
 import { Router } from "@angular/router";
 import { AlertController } from "@ionic/angular";
 import { Storage } from "@ionic/storage";
+import * as firebase from "firebase";
 
 @Injectable({
   providedIn: "root",
@@ -52,9 +53,9 @@ export class LoginService {
     }
   }
 
-  retornarUsuario() {
+  async retornarUsuario() {
     let user;
-    user = this.rutaFire.currentUser;
+    user = await this.rutaFire.currentUser;
     // console.log(this.rutaFire.currentUser);
 
     if (user) {
