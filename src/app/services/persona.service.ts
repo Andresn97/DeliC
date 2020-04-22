@@ -19,6 +19,7 @@ import { ToastController } from "@ionic/angular";
 export class PersonaService {
   // bookingListRef: AngularFireList<any>;
   // private personas: Observable<Persona[]>;
+  
   private dbPath: string = "/personas";
   private personaList: AngularFireList<Persona> = null;
 

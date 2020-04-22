@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { AlertController } from "@ionic/angular";
 import { Storage } from "@ionic/storage";
 import * as firebase from "firebase";
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 
 @Injectable({
   providedIn: "root",
@@ -17,7 +18,8 @@ export class LoginService {
     private rutaFire: AngularFireAuth,
     private route: Router,
     private alertCtrl: AlertController,
-    private strg: Storage
+    private strg: Storage,
+    public fb : Facebook
   ) {
     rutaFire.authState.subscribe((user) => (this.logueado = user));
   }
@@ -114,4 +116,15 @@ export class LoginService {
 
     await alert.present();
   }
+
+  login(){
+      this.fb.login(['email'])
+      .then((res: FacebookLoginResponse) => 
+            //console.log('Logged into Facebook!', res)
+            alert(JSON.stringify(res))
+      )
+    .catch(e => console.log('Error logging into Facebook', e));
+
+  }
+
 }
