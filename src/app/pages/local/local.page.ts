@@ -24,6 +24,7 @@ export class LocalPage implements OnInit {
   private platos: Observable<Plato[]>;
   private local: Local = null;
   private plato: Plato;
+  private corrreoLogeado: any;
   private suscribe: any;
   private suscribe2: any;
 

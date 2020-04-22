@@ -6,6 +6,7 @@ import { PersonaService } from "src/app/services/persona.service";
 import { Persona } from "src/app/models/persona";
 import { Observable } from "rxjs";
 import { AlertController } from "@ionic/angular";
+import * as firebase from "firebase";
 
 @Component({
   selector: "app-home",
@@ -27,58 +28,64 @@ export class HomePage {
 
   ngOnInit(): void {
     this.personas = this.prsnSrv.getPersonaList();
+    // this.corrreoLogeado = firebase.auth().currentUser.email;
+    // console.log();
   }
 
-  // ionViewWillLeave() {
-  //   this.per.unsubscribe();
-  // }
+  ionViewWillLeave() {
+    this.per.unsubscribe();
+  }
 
   // formulario.valid
 
   logeoUsuario() {
-    const user = this.lgnSrv.Login(this.user);
-    if (user) {
+    const user = this.lgnSrv.Login(this.user).catch((err) => {
+      console.log("No se pudo logear");
+    });
+
+    if (user !== null) {
       console.log("Logeo con éxito");
       console.log("Usuario:", this.user.correo);
       console.log("Contraseña:", this.user.contrasena);
       //Validar el tipo de Persona
-      this.recuperarTipo();
-    } else {
-      console.log("El logeo no se pudo realizar");
+      this.recuperarTipo(this.user.correo);
     }
     this.user.correo = null;
     this.user.contrasena = null;
   }
 
-  recuperarTipo() {
-    this.lgnSrv.retornarUsuario().then((data: firebase.User) => {
-      this.usuario = new Usuario();
-      this.usuario.correo = data.email;
-      // this.lgnSrv.cargarCorreo(this.usuario.correo);
+  recuperarTipo(correo: string) {
+    // this.corrreoLogeado
+    //   .then((data: firebase.User) => {
+    //     this.usuario = new Usuario();
+    //     this.usuario.correo = data.email;
+    //     // this.lgnSrv.cargarCorreo(this.usuario.correo);
 
-      //Extracción de datos de Persona
-      this.per = this.personas.subscribe(
-        (datos) => {
-          this.valores = datos;
+    //     //Extracción de datos de Persona
 
-          this.valores.forEach((persona) => {
-            if (persona.usuario.correo === this.usuario.correo) {
-              if (persona.tipo == "Vendedor") {
-                this.router.navigateByUrl("/local");
-              } else {
-                this.router.navigateByUrl("/inicio");
-              }
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
 
-              console.log("Usuario:", this.usuario);
+    this.per = this.personas.subscribe(
+      (datos) => {
+        this.valores = datos;
 
-              console.log("Esta es la persona:", persona);
+        this.valores.forEach((persona) => {
+          if (persona.usuario.correo === correo) {
+            if (persona.tipo == "Vendedor") {
+              this.router.navigateByUrl("/local");
+            } else {
+              this.router.navigateByUrl("/inicio");
             }
-          });
-        },
-        (error) => {
-          console.log("El usuario no se logeo correctamente");
-        }
-      );
-    });
+            console.log("Esta es la persona:", persona);
+          }
+        });
+      },
+      (error) => {
+        console.log("El usuario no se logeo correctamente");
+      }
+    );
   }
 }
