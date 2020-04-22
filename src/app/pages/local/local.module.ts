@@ -9,8 +9,11 @@ import { LocalPageRoutingModule } from "./local-routing.module";
 
 import { LocalPage } from "./local.page";
 import { ComponentsModule } from "src/app/components/components.module";
+import { PlatoPage } from "../plato/plato.page";
+import { PlatoPageModule } from "../plato/plato.module";
 
 @NgModule({
+  entryComponents: [PlatoPage],
   imports: [
     CommonModule,
     FormsModule,
@@ -18,6 +21,7 @@ import { ComponentsModule } from "src/app/components/components.module";
     LocalPageRoutingModule,
     NgxQRCodeModule,
     ComponentsModule,
+    PlatoPageModule,
   ],
   declarations: [LocalPage],
 })

@@ -29,9 +29,9 @@ export class HomePage {
     this.personas = this.prsnSrv.getPersonaList();
   }
 
-  ionViewWillLeave() {
-    this.per.unsubscribe();
-  }
+  // ionViewWillLeave() {
+  //   this.per.unsubscribe();
+  // }
 
   // formulario.valid
 
@@ -54,18 +54,14 @@ export class HomePage {
     this.lgnSrv.retornarUsuario().then((data: firebase.User) => {
       this.usuario = new Usuario();
       this.usuario.correo = data.email;
-      this.lgnSrv.cargarCorreo(this.usuario.correo);
+      // this.lgnSrv.cargarCorreo(this.usuario.correo);
+
       //Extracción de datos de Persona
       this.per = this.personas.subscribe(
         (datos) => {
           this.valores = datos;
 
           this.valores.forEach((persona) => {
-            // console.log(this.user.correo);
-            // console.log(persona.usuario.correo);
-            // console.log(persona.tipo);
-            // console.log("---------------------");
-
             if (persona.usuario.correo === this.usuario.correo) {
               if (persona.tipo == "Vendedor") {
                 this.router.navigateByUrl("/local");

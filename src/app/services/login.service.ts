@@ -53,7 +53,9 @@ export class LoginService {
   }
 
   retornarUsuario() {
-    let user = this.rutaFire.currentUser;
+    let user;
+    user = this.rutaFire.currentUser;
+    // console.log(this.rutaFire.currentUser);
 
     if (user) {
       console.log("Usuario sigue logueado");
@@ -84,7 +86,7 @@ export class LoginService {
   }
 
   eliminarCorreo(correo: string) {
-    this.strg.removeItem("correo");
+    this.strg.remove("correo");
   }
 
   async presentAlert() {
