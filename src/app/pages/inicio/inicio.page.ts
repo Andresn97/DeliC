@@ -32,14 +32,4 @@ export class InicioPage implements OnInit {
         console.log();
       });
   }
-
-  // salir() {
-  //   const logOut = this.lgn.logOut();
-  //   if (logOut) {
-  //     console.log("Usuario salió exitosamente");
-  //     this.router.navigateByUrl("/");
-  //   } else {
-  //     console.log("Ocurrió un error en cerrar la Sesión");
-  //   }
-  // }
 }

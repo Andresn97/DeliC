@@ -95,6 +95,7 @@ export class LoginService {
   async presentAlert() {
     const alert = await this.alertCtrl.create({
       header: "Aviso",
+      backdropDismiss: false,
       message: "No se pudo ingresar, revise los campos",
       buttons: [
         {
