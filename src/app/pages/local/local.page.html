@@ -7,11 +7,47 @@
 <app-header titulo="Local"></app-header>
 
 <ion-content>
-  <ion-card-title>{{local.nombre}}</ion-card-title>
+  <ion-card>
+    <ion-card-title class="ion-text-center" color="principal"
+      ><h4>Nombre del Local</h4></ion-card-title
+    >
+  </ion-card>
 
-  <ion-card-content>
-    Awesome content
-  </ion-card-content>
+  <ion-card
+    ><br />
+    <ion-card-subtitle class="ion-text-center"
+      >Descripción del Local</ion-card-subtitle
+    >
 
-  <ngx-qrcode [(qrc-value)]="url" [qrc-element-type]="tipo"> </ngx-qrcode>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="12">
+          <ion-card-content>
+            Awesome content
+          </ion-card-content>
+        </ion-col>
+        <ion-col size="12">
+          <ion-card-subtitle class="ion-text-left" id="codigo"
+            >Código QR del Local</ion-card-subtitle
+          >
+          <br />
+          <ngx-qrcode [(qrc-value)]="url" [qrc-element-type]="tipo">
+          </ngx-qrcode>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <ion-card>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="10">
+          <ion-button (click)="presentModal()" color="secundario">
+            <ion-icon slot="icon-only" name="add"></ion-icon>
+            Añadir Plato
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
 </ion-content>

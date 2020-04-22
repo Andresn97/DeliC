@@ -9,6 +9,7 @@ import { Persona } from "../models/persona";
 import * as firebase from "firebase";
 import { Usuario } from "../models/usuario";
 import { Observable } from "rxjs";
+import { ToastController } from "@ionic/angular";
 // import { Observable } from "rxjs";
 // import { map } from "rxjs/operators";
 
@@ -22,7 +23,10 @@ export class PersonaService {
   private dbPath: string = "/personas";
   private personaList: AngularFireList<Persona> = null;
 
-  constructor(private db: AngularFireDatabase) {
+  constructor(
+    private db: AngularFireDatabase,
+    private toastController: ToastController
+  ) {
     this.personaList = this.db.list(this.dbPath);
   }
 
@@ -31,9 +35,11 @@ export class PersonaService {
     // persona.fechaNacimiento = firebase.firestore.Timestamp.fromDate(
     //   persona.fechaNacimiento
     // );
-    //persona.usuario.contrasena
-    //return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
-    this.personaList.push(persona);
+    this.personaList.push(persona).then((data) => {
+      this.mostrarMensaje(
+        `${persona.nombres.primerNombre} se registro en DeliC :)`
+      );
+    });
   }
 
   // getPersona(id: string): Promise<void> {
@@ -91,67 +97,11 @@ export class PersonaService {
     return this.personaList.remove(id);
   }
 
-  // crearPersona(persona: Persona) {
-  //   return this.bookingListRef.push({
-  //     nombres: {
-  //       primerNombre: persona.nombres.primerNombre,
-  //       segundoNombre: persona.nombres.segundoNombre,
-  //     },
-  //     apellidos: {
-  //       primerApellido: persona.apellidos.primerApellido,
-  //       segundoApellido: persona.apellidos.segundoApellido,
-  //     },
-  //     genero: persona.genero,
-  //     edad: persona.edad,
-  //     fechaNacimiento: persona.fechaNacimiento,
-  //     usuario: {
-  //       correo: persona.usuario.correo,
-  //       nombre: persona.usuario.nombre,
-  //       contrasena: persona.usuario.contrasena,
-  //       perfilFacebook: persona.usuario.perfilFacebook,
-  //       estado: persona.usuario.estado,
-  //       activo: persona.usuario.activo,
-  //     },
-  //     celular: persona.celular,
-  //     fechaRegistro: persona.fechaRegistro,
-  //     activo: persona.activo,
-  //   });
-  // }
-
-  // getPersonaList() {
-  //   this.bookingListRef = this.db.list("/persona");
-  //   return this.bookingListRef;
-  // }
-
-  // editarPersona(id, persona: Persona) {
-  //   return this.bookingRef.update({
-  //     nombres: {
-  //       primerNombre: persona.nombres.primerNombre,
-  //       segundoNombre: persona.nombres.segundoNombre,
-  //     },
-  //     apellidos: {
-  //       primerApellido: persona.apellidos.primerApellido,
-  //       segundoApellido: persona.apellidos.segundoApellido,
-  //     },
-  //     genero: persona.genero,
-  //     edad: persona.edad,
-  //     fechaNacimiento: persona.fechaNacimiento,
-  //     usuario: {
-  //       correo: persona.usuario.correo,
-  //       nombre: persona.usuario.nombre,
-  //       contrasena: persona.usuario.contrasena,
-  //       perfilFacebook: persona.usuario.perfilFacebook,
-  //       estado: persona.usuario.estado,
-  //       activo: persona.usuario.activo,
-  //     },
-  //     celular: persona.celular,
-  //     fechaRegistro: persona.fechaRegistro,
-  //     activo: persona.activo,
-  //   });
-  // }
-
-  // eliminarPersona(id: string) {
-  //   this.bookingRef = this.db.object("/persona/" + id);
-  //   this.bookingRef.remove();
-  // }
+  async mostrarMensaje(mensaje: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 4000,
+    });
+    toast.present();
+  }
 }
