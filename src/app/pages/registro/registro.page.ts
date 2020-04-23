@@ -5,7 +5,7 @@ import { Usuario } from "src/app/models/usuario";
 import { PickerController } from "@ionic/angular";
 import { PickerOptions } from "@ionic/core";
 import { LoginService } from "src/app/services/login.service";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { PersonaService } from "src/app/services/persona.service";
 
 @Component({
@@ -29,11 +29,11 @@ export class RegistroPage implements OnInit {
   pass: string;
 
   constructor(
-    private sltc: SeleccionService,
     private pickerCtrll: PickerController,
     private lgn: LoginService,
     private prsSvc: PersonaService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.usuario = {
       correo: null,
@@ -61,10 +61,7 @@ export class RegistroPage implements OnInit {
   }
 
   ngOnInit() {
-    // this.sltc.getSeleccion().then((val: string) => {
-    //   this.seleccion = val;
-    // console.log("Seleccion: ", this.seleccion);
-    // });
+    let param = this.route.snapshot.params.data;
   }
 
   //Validar formularios

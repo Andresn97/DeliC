@@ -1,0 +1,275 @@
+<ion-header>
+  <ion-toolbar no-border color="light">
+    <ion-title class="ion-text-left">Opina DeliC</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarOpinion(true)" color="principal">
+        <ion-icon name="restaurant" slot="start"></ion-icon>
+        Cancelar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides mode="ios" pager="false" [options]="slideOpts" class="slide-full">
+    <ion-slide class="form">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title
+                  >Opinar ayuda a que el Negocio crezca!!</ion-card-title
+                >
+              </ion-card-header>
+              <ion-card-content center>
+                <div class="container">
+                  <form #formulario="ngForm" (ngSubmit)="registrarOpinion()">
+                    <ion-list>
+                      <!-- <span
+                          *ngIf="formulario.submitted && formulario.controls['primerNombre'].errors"
+                          >El Nombre es obligatorio</span
+                        > -->
+                      <ion-label position="floating" class="pregunta"
+                        >¿Le gustó la presentación de la comida?
+                        <span style="color: red;">*</span></ion-label
+                      ><br /><br />
+                      <ion-button
+                        (click)="pregunta1('¿Le gustó la presentación de la comida?','Si, me gusta mucho la presentación')"
+                        expand="block"
+                        shape="round"
+                        color="secundario"
+                      >
+                        Si, me gusta mucho la presentación
+                      </ion-button>
+                      <ion-button
+                        (click)="pregunta1('¿Le gustó la presentación de la comida?','Pues, me parece normal')"
+                        expand="block"
+                        shape="round"
+                        color="secundario"
+                      >
+                        Pues, me parece normal
+                      </ion-button>
+                      <ion-button
+                        (click)="pregunta1('¿Le gustó la presentación de la comida?','No, se ve de una manera poco comestible')"
+                        expand="block"
+                        shape="round"
+                        color="secundario"
+                      >
+                        No, se ve de una manera poco comestible
+                      </ion-button>
+                      <br />
+                    </ion-list>
+                  </form>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+
+    <ion-slide class="form">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title
+                  >Opinar ayuda a que el Negocio crezca!!</ion-card-title
+                >
+              </ion-card-header>
+              <ion-card-content center>
+                <div class="container">
+                  <form #formulario="ngForm" (ngSubmit)="registrarOpinion()">
+                    <ion-list>
+                      <!-- <span
+                          *ngIf="formulario.submitted && formulario.controls['primerNombre'].errors"
+                          >El Nombre es obligatorio</span
+                        > -->
+                      <ion-label position="floating" class="pregunta"
+                        >¿Le parece que el costo del plato es el adecuado?
+                        <span style="color: red;">*</span></ion-label
+                      ><br /><br />
+                      <ion-button
+                        (click)="pregunta2('¿Le parece que el costo del plato es el adecuado?','Sí, me parece un precio razonable')"
+                        expand="block"
+                        shape="round"
+                        color="secundario"
+                      >
+                        Sí, me parece un precio razonable
+                      </ion-button>
+                      <ion-button
+                        (click)="pregunta2('¿Le parece que el costo del plato es el adecuado?','No, me parece que es una exageración')"
+                        expand="block"
+                        shape="round"
+                        color="secundario"
+                      >
+                        No, me parece que es una exageración
+                      </ion-button>
+                      <br />
+                    </ion-list>
+                  </form>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+
+    <ion-slide class="form">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title
+                  >Opinar ayuda a que el Negocio crezca!!</ion-card-title
+                >
+              </ion-card-header>
+              <ion-card-content center>
+                <div class="container">
+                  <form #formulario="ngForm" (ngSubmit)="registrarOpinion()">
+                    <ion-list>
+                      <!-- <span
+                          *ngIf="formulario.submitted && formulario.controls['primerNombre'].errors"
+                          >El Nombre es obligatorio</span
+                        > -->
+                      <ion-label position="floating" class="pregunta"
+                        >¿Cree que los ingredientes fueron los adecuados para el
+                        plato? <span style="color: red;">*</span></ion-label
+                      ><br /><br />
+                      <ion-button
+                        (click)="pregunta3('¿Cree que los ingredientes fueron los adecuados para el plato?','Muy de acuerdo')"
+                        expand="block"
+                        shape="round"
+                        color="secundario"
+                      >
+                        Muy de acuerdo
+                      </ion-button>
+                      <ion-button
+                        (click)="pregunta3('¿Cree que los ingredientes fueron los adecuados para el plato?','En su gran mayoría')"
+                        expand="block"
+                        shape="round"
+                        color="secundario"
+                      >
+                        En su gran mayoría
+                      </ion-button>
+                      <ion-button
+                        (click)="pregunta3('¿Cree que los ingredientes fueron los adecuados para el plato?','No estoy de acuerdo')"
+                        expand="block"
+                        shape="round"
+                        color="secundario"
+                      >
+                        No estoy de acuerdo
+                      </ion-button>
+                      <br />
+                    </ion-list>
+                  </form>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+
+    <ion-slide class="form">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title
+                  >Opinar ayuda a que el Negocio crezca!!</ion-card-title
+                >
+              </ion-card-header>
+              <ion-card-content center>
+                <div class="container">
+                  <form #formulario="ngForm" (ngSubmit)="registrarOpinion()">
+                    <ion-list>
+                      <!-- <span
+                          *ngIf="formulario.submitted && formulario.controls['primerNombre'].errors"
+                          >El Nombre es obligatorio</span
+                        > -->
+                      <ion-label position="floating" class="pregunta"
+                        >¿Le agradó el servicio del vendedor al entregarle su
+                        plato?<span style="color: red;">*</span></ion-label
+                      ><br /><br />
+                      <ion-button
+                        (click)="pregunta4('¿Le agradó el servicio del vendedor al entregarle su plato?','Me agradó mucho')"
+                        expand="block"
+                        shape="round"
+                        color="secundario"
+                      >
+                        Muy de acuerdo
+                      </ion-button>
+                      <ion-button
+                        (click)="pregunta4('¿Le agradó el servicio del vendedor al entregarle su plato?','Normal')"
+                        expand="block"
+                        shape="round"
+                        color="secundario"
+                      >
+                        En su gran mayoría
+                      </ion-button>
+                      <ion-button
+                        (click)="pregunta4('¿¿Le agradó el servicio del vendedor al entregarle su plato?','No me gustó')"
+                        expand="block"
+                        shape="round"
+                        color="secundario"
+                      >
+                        No estoy de acuerdo
+                      </ion-button>
+                      <br />
+                    </ion-list>
+                  </form>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+
+    <ion-slide class="form">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title
+                  >Opinar ayuda a que el Negocio crezca!!</ion-card-title
+                >
+              </ion-card-header>
+              <ion-card-content center>
+                <div class="container">
+                  <form #formulario="ngForm" (ngSubmit)="registrarOpinion()">
+                    <ion-list>
+                      <ion-label position="floating"
+                        >¿Alguna observación adicional? (Opcional)
+                      </ion-label>
+                      <ion-item class="items">
+                        <ion-textarea name="observacion" [(ngModel)]="opinion">
+                        </ion-textarea>
+                      </ion-item>
+                      <br />
+                      <ion-button
+                        (click)="registrarOpinion()"
+                        expand="block"
+                        shape="round"
+                        color="secundario"
+                      >
+                        <span class="guardar">Hacer Observación</span>
+                      </ion-button>
+                    </ion-list>
+                  </form>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

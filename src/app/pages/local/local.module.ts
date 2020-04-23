@@ -11,9 +11,11 @@ import { LocalPage } from "./local.page";
 import { ComponentsModule } from "src/app/components/components.module";
 import { PlatoPage } from "../plato/plato.page";
 import { PlatoPageModule } from "../plato/plato.module";
+import { OpinionUsuarioPage } from "../opinion-usuario/opinion-usuario.page";
+import { OpinionUsuarioPageModule } from "../opinion-usuario/opinion-usuario.module";
 
 @NgModule({
-  entryComponents: [PlatoPage],
+  entryComponents: [PlatoPage, OpinionUsuarioPage],
   imports: [
     CommonModule,
     FormsModule,
@@ -22,6 +24,7 @@ import { PlatoPageModule } from "../plato/plato.module";
     NgxQRCodeModule,
     ComponentsModule,
     PlatoPageModule,
+    OpinionUsuarioPageModule,
   ],
   declarations: [LocalPage],
 })

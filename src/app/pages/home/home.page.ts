@@ -5,8 +5,7 @@ import { LoginService } from "src/app/services/login.service";
 import { PersonaService } from "src/app/services/persona.service";
 import { Persona } from "src/app/models/persona";
 import { Observable } from "rxjs";
-import { AlertController } from "@ionic/angular";
-import * as firebase from "firebase";
+import { LoginFacebookService } from "src/app/services/login-facebook.service";
 
 @Component({
   selector: "app-home",
@@ -17,13 +16,14 @@ export class HomePage {
   public user: Usuario = new Usuario();
   private personas: Observable<Persona[]>;
   private valores: Persona[];
-  private usuario: Usuario;
   per: any;
+  private withFacebook: boolean = false;
 
   constructor(
     private router: Router,
     private lgnSrv: LoginService,
-    private prsnSrv: PersonaService
+    private prsnSrv: PersonaService,
+    private lgnFbSrv: LoginFacebookService
   ) {}
 
   ngOnInit(): void {
@@ -33,7 +33,9 @@ export class HomePage {
   }
 
   ionViewWillLeave() {
-    this.per.unsubscribe();
+    if (this.withFacebook === false) {
+      this.per.unsubscribe();
+    }
   }
 
   // formulario.valid
@@ -44,14 +46,27 @@ export class HomePage {
     });
 
     if (user !== null) {
-      console.log("Logeo con éxito");
       console.log("Usuario:", this.user.correo);
       console.log("Contraseña:", this.user.contrasena);
+      this.lgnSrv.cargarCorreo(this.user.correo);
       //Validar el tipo de Persona
       this.recuperarTipo(this.user.correo);
     }
     this.user.correo = null;
     this.user.contrasena = null;
+  }
+
+  entrarWithFace() {
+    this.lgnFbSrv
+      .login()
+      .then((data) => {
+        console.log(data);
+        this.withFacebook = true;
+        this.router.navigateByUrl("/registro/'facebook'");
+      })
+      .catch((err) => {
+        console.log("Error en el logeo", err);
+      });
   }
 
   recuperarTipo(correo: string) {
@@ -88,5 +103,4 @@ export class HomePage {
       }
     );
   }
-  S;
 }

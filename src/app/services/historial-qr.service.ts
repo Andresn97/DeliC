@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HistorialQR } from "../models/historial-qr";
 import { AngularFireDatabase, AngularFireList } from "@angular/fire/database";
 import * as firebase from "firebase";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root",
@@ -11,7 +12,7 @@ export class HistorialQRService {
   private dbPath: string = "/historialQR";
   private histQRList: AngularFireList<HistorialQR> = null;
 
-  constructor(private db: AngularFireDatabase) {
+  constructor(private db: AngularFireDatabase, private router: Router) {
     this.histQRList = this.db.list(this.dbPath);
   }
 
@@ -26,7 +27,14 @@ export class HistorialQRService {
 
   crearHistorialQR(historial: HistorialQR) {
     historial.fechaRegistro = firebase.firestore.Timestamp.fromDate(new Date());
-    this.histQRList.push(historial);
+    this.histQRList
+      .push(historial)
+      .then((data) => {
+        this.router.navigateByUrl(historial.enlace);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   getHistorialQR() {
