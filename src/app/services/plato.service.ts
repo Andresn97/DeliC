@@ -48,7 +48,7 @@ export class PlatoService {
   async mostrarMensaje(mensaje: string) {
     const toast = await this.toastController.create({
       message: mensaje,
-      duration: 4000,
+      duration: 3500,
     });
     toast.present();
   }

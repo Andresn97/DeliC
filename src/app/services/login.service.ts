@@ -5,7 +5,7 @@ import { Router } from "@angular/router";
 import { AlertController } from "@ionic/angular";
 import { Storage } from "@ionic/storage";
 import * as firebase from "firebase";
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
+import { Facebook, FacebookLoginResponse } from "@ionic-native/facebook/ngx";
 
 @Injectable({
   providedIn: "root",
@@ -19,7 +19,7 @@ export class LoginService {
     private route: Router,
     private alertCtrl: AlertController,
     private strg: Storage,
-    public fb : Facebook
+    public fb: Facebook
   ) {
     rutaFire.authState.subscribe((user) => (this.logueado = user));
   }
@@ -79,17 +79,27 @@ export class LoginService {
 
   cargarCorreo(correo: string) {
     this.usuario = new Usuario();
-    this.strg.set("correo", this.usuario.correo);
+    this.usuario.correo = correo;
+    this.strg.set("correo", this.usuario.correo).then((data) => {});
   }
 
   async retornarCorreo(): Promise<Usuario> {
-    this.usuario = new Usuario();
-    this.usuario.correo = await this.strg.get("correo");
-    return this.usuario;
+    // this.usuario = new Usuario();
+    // this.usuario.correo =
+    // console.log("Correo retornado,", this.strg.get("correo"));
+    return await this.strg.get("correo");
+    // return this.usuario;
   }
 
-  eliminarCorreo(correo: string) {
-    this.strg.remove("correo");
+  eliminarCorreo() {
+    this.strg
+      .remove("correo")
+      .then((data) => {
+        console.log("Se eliminó correctamente");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   async presentAlert() {
@@ -116,5 +126,4 @@ export class LoginService {
 
     await alert.present();
   }
-
 }

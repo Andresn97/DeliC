@@ -19,7 +19,7 @@ import { ToastController } from "@ionic/angular";
 export class PersonaService {
   // bookingListRef: AngularFireList<any>;
   // private personas: Observable<Persona[]>;
-  
+
   private dbPath: string = "/personas";
   private personaList: AngularFireList<Persona> = null;
 
@@ -100,7 +100,7 @@ export class PersonaService {
   async mostrarMensaje(mensaje: string) {
     const toast = await this.toastController.create({
       message: mensaje,
-      duration: 4000,
+      duration: 3500,
     });
     toast.present();
   }
