@@ -7,6 +7,9 @@ import { Persona } from "src/app/models/persona";
 import { Observable } from "rxjs";
 import { AlertController } from "@ionic/angular";
 import * as firebase from "firebase";
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: "app-home",
@@ -23,7 +26,10 @@ export class HomePage {
   constructor(
     private router: Router,
     private lgnSrv: LoginService,
-    private prsnSrv: PersonaService
+    private prsnSrv: PersonaService,
+    public fb : Facebook,
+    private afAuth: AngularFireAuth,
+    private platform: Platform
   ) {}
 
   ngOnInit(): void {
@@ -89,4 +95,30 @@ export class HomePage {
     );
   }
   S;
+
+login(){
+      let provider = new firebase.auth.FacebookAuthProvider();
+
+      firebase.auth().signInWithRedirect(provider).then(()=>{
+        firebase.auth().getRedirectResult().then((result)=>{
+          alert(JSON.stringify(result));
+      }).catch(function(error) {
+        alert(JSON.stringify(error))
+      });
+      })
+      
+      // this.fb.login(['email']).then((loginResponse)=> {
+
+      //     let credential = firebase.auth.FacebookAuthProvider.credential(loginResponse.authResponse.accessToken)
+          
+      //     firebase.auth().signInWithCredential(credential).then((info) => {
+      //       alert(JSON.stringify(info));
+      //     })
+
+      //   })
+      
+    
+
+}
+
 }

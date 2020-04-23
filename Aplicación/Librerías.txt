@@ -21,10 +21,18 @@ npm install @ionic-native/barcode-scanner
 facebook
 ionic cordova plugin add cordova-plugin-facebook4 --variable APP_ID="304277580557030" --variable APP_NAME="DeliC"
 npm install --save @ionic-native/facebook
---ionic cordova platform add android
+
+ionic cordova platform add android
+npm i -g native-run
+    ionic cordova build android
+    or
+    ionic cordova run android
 
 Autenticacion en firebase
 cordova plugin add cordova-plugin-buildinfo --save
 cordova plugin add cordova-universal-links-plugin-fix --save
 cordova plugin add cordova-plugin-browsertab --save
 cordova plugin add cordova-plugin-inappbrowser --save
+
+npm i -g cordova-res
+ionic cordova resources android --force

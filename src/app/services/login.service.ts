@@ -117,14 +117,4 @@ export class LoginService {
     await alert.present();
   }
 
-  login(){
-      this.fb.login(['email'])
-      .then((res: FacebookLoginResponse) => 
-            //console.log('Logged into Facebook!', res)
-            alert(JSON.stringify(res))
-      )
-    .catch(e => console.log('Error logging into Facebook', e));
-
-  }
-
 }
