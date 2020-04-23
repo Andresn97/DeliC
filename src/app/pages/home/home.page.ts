@@ -7,9 +7,9 @@ import { Persona } from "src/app/models/persona";
 import { Observable } from "rxjs";
 import { AlertController } from "@ionic/angular";
 import * as firebase from "firebase";
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { Platform } from '@ionic/angular';
+import { Facebook, FacebookLoginResponse } from "@ionic-native/facebook/ngx";
+import { AngularFireAuth } from "@angular/fire/auth";
+import { Platform } from "@ionic/angular";
 
 @Component({
   selector: "app-home",
@@ -27,7 +27,7 @@ export class HomePage {
     private router: Router,
     private lgnSrv: LoginService,
     private prsnSrv: PersonaService,
-    public fb : Facebook,
+    public fb: Facebook,
     private afAuth: AngularFireAuth,
     private platform: Platform
   ) {}
@@ -62,18 +62,18 @@ export class HomePage {
     this.user.contrasena = null;
   }
 
-  entrarWithFace() {
-    this.lgnFbSrv
-      .login()
-      .then((data) => {
-        console.log(data);
-        this.withFacebook = true;
-        this.router.navigateByUrl("/registro/'facebook'");
-      })
-      .catch((err) => {
-        console.log("Error en el logeo", err);
-      });
-  }
+  // entrarWithFace() {
+  //   this.lgnFbSrv
+  //     .login()
+  //     .then((data) => {
+  //       console.log(data);
+  //       this.withFacebook = true;
+  //       this.router.navigateByUrl("/registro/'facebook'");
+  //     })
+  //     .catch((err) => {
+  //       console.log("Error en el logeo", err);
+  //     });
+  // }
 
   recuperarTipo(correo: string) {
     // this.corrreoLogeado
@@ -109,31 +109,36 @@ export class HomePage {
       }
     );
   }
-  S;
 
-login(){
-      let provider = new firebase.auth.FacebookAuthProvider();
+  login() {
+    let provider = new firebase.auth.FacebookAuthProvider();
 
-      firebase.auth().signInWithRedirect(provider).then(()=>{
-        firebase.auth().getRedirectResult().then((result)=>{
-          alert(JSON.stringify(result));
-      }).catch(function(error) {
-        alert(JSON.stringify(error))
+    firebase
+      .auth()
+      .signInWithRedirect(provider)
+      .then(() => {
+        firebase
+          .auth()
+          .getRedirectResult()
+          .then((result) => {
+            console.log("Se logeo");
+
+            alert(JSON.stringify(result));
+            this.router.navigateByUrl("/inicio");
+          })
+          .catch(function (error) {
+            alert(JSON.stringify(error));
+          });
       });
-      })
-      
-      // this.fb.login(['email']).then((loginResponse)=> {
 
-      //     let credential = firebase.auth.FacebookAuthProvider.credential(loginResponse.authResponse.accessToken)
-          
-      //     firebase.auth().signInWithCredential(credential).then((info) => {
-      //       alert(JSON.stringify(info));
-      //     })
+    // this.fb.login(['email']).then((loginResponse)=> {
 
-      //   })
-      
-    
+    //     let credential = firebase.auth.FacebookAuthProvider.credential(loginResponse.authResponse.accessToken)
 
-}
+    //     firebase.auth().signInWithCredential(credential).then((info) => {
+    //       alert(JSON.stringify(info));
+    //     })
 
+    //   })
+  }
 }
